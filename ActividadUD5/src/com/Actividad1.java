@@ -11,8 +11,8 @@ public class Actividad1 {
 			System.out.println("Introduzca los numeros");
 			num[i] = sc.nextDouble();		
 		}
-		for (int i = 0; i < 5 ; i++) {
-			System.out.println(num[i]);
+		for (double num1: num) {
+			System.out.println(num1);
 		}
 	}
 }
