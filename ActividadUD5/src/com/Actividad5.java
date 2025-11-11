@@ -1,19 +1,92 @@
 package com;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Actividad5 {
-
 	public static void main(String[] args) {
-		Random random = new Random();
-		Scanner sc = new Scanner (System.in);
-		int[] combinacion = {};
-		int fallos = 0;
-		System.out.println("Elige un numero del 1 al 5 y esa sera tu dificultad");
-		combinacion[] sc = sc.nextInt;
-		/*while (fallos != 0) {
-			*/fallos++;
-		//}
+		Scanner sc = new Scanner(System.in);
+		int n = -1;
+		int[] tablaUsuario, tablaAleatoria;
+		char[] tablaResultado;
+		do {
+			System.out.println("Dime un número entre 1 y 5");
+			n = sc.nextInt();
+		} while (n < 0 || n > 5);
+		int[] tabla = crearTablaVacia(n);
+		tablaAleatoria = rellenarTablaConNumeroAleatorio(tabla);
+		System.out.println(Arrays.toString(tabla));
+		do {
+			tablaUsuario = tablaUsuario(tabla, sc);
+			System.out.println(Arrays.toString(tablaUsuario));
+			tablaResultado = comprobacionTablas(tablaUsuario, tablaAleatoria);
+			System.out.println(Arrays.toString(tablaResultado));
+		} while (!esFinal(tablaResultado));
+	
+		System.out.println("Fin");
 	}
+
+	public static boolean esFinal(char[] tablaResultado) {
+		boolean resultado = true;
+		for (int i = 0; i < tablaResultado.length; i++) {
+			if (tablaResultado[i] != '=') {
+				return false;
+			}
+		}
+		return resultado;
+	}
+
+	public static char[] comprobacionTablas(int[] tablaUsuario, int[] tablaAleatoria) {
+		char[] tablaResultado = new char[tablaUsuario.length];
+		for (int i = 0; i < tablaUsuario.length; i++) {
+			if (tablaUsuario[i] < tablaAleatoria[i]) {
+				tablaResultado[i] = '-';
+			} else if (tablaUsuario[i] > tablaAleatoria[i]) {
+				tablaResultado[i] = '+';
+			} else {
+				tablaResultado[i] = '=';
+			}
+		}
+		return tablaResultado;
+	}
+
+	private static int[] tablaUsuario(int[] tabla, Scanner sc) {
+		int[] tablaDevuelta = new int[tabla.length];
+		for (int i = 0; i < tabla.length; i++) {
+			System.out.println("Dime un numero " + (i + 1));
+			tablaDevuelta[i] = sc.nextInt();
+		}
+		return tablaDevuelta;
+	}
+
+	public static int[] crearTablaVacia(int n) {
+		int[] tabla = new int[n];
+		return tabla;
+	}
+
+	public static int[] rellenarTablaConNumeroAleatorio(int[] tabla) {
+		Random random = new Random();
+
+		for (int i = 0; i < tabla.length; i++) {
+			tabla[i] = random.nextInt(10);
+		}
+		return tabla;
+	}
+
+	public static void testTablas() {
+		int[] tablaUsuario = { 2, 3, 1 };
+		int[] tablaAleatoria = { 1, 3, 3 };
+		char[] test = comprobacionTablas(tablaUsuario, tablaAleatoria);
+		System.out.println(Arrays.toString(test));
+
+	}
+
+	public static void testTablaResultado() {
+		char[] tablaResultado1 = { '=', '=', '=' };
+		char[] tablaResultado2 = { '=', '-', '=' };
+		System.out.println("1 :: " + esFinal(tablaResultado1));
+		System.out.println("2 :: " + esFinal(tablaResultado2));
+	}
+
 }

@@ -3,44 +3,55 @@ package com;
 import java.util.Scanner;
 
 public class Actividad3 {
-
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Di cuantas columnas va a tener tu tabla");
+		System.out.println("➤ Dime un número <n> para el tamaño de la tabla");
 		int n = sc.nextInt();
-		int[] tabla = new int[n];
-		for (int i = 0; i < tabla.length; i++) {
-			System.out.println("Introduzca numero");
-			tabla[i] = sc.nextInt();
+		int[] numeros = new int[n];
+		for (int indice = 0; indice < numeros.length; indice++) {
+			System.out.println(" Dime un número: ");
+			int numero = sc.nextInt();
+			numeros[indice] = numero;
 		}
-		System.out.println("Los numero positivos son: " + mediaPositivos(tabla) + " los negativos son: "+ mediaNegativos(tabla) + " los ceros son: " + mediaCeros(tabla));
+		int totalDeCeros = cuentaCero(numeros);
+		System.out.println("El total de ceros es " + totalDeCeros);
+		System.out.println("El total de media de positivos " + mediaPositivos(numeros));
+		System.out.println("El total de media de negativos " + mediaNegativos(numeros));
+		System.out.println("☠ Fin ");
 	}
 
-	public static double mediaPositivos(int[] numeros) {
-		int contPositivo = 0;
-		for (int numero : numeros)
-			if (numero > 0) {
-				contPositivo++
+	private static double mediaNegativos(int[] t) {
+		int contador = 0;
+		double resultado = 0.0;
+		for (int i = 0; i < t.length; i++) {
+			if (t[i] < 0) {
+				contador++;
+				resultado += t[i];
 			}
-		return contPositivo ;
+		}
+		return resultado;
 	}
 
-	public static double mediaNegativos(int[] numeros) {
-		int contNegativo = 0;
-		for (int numero : numeros)
-			if (numero < 0) {
-				contNegativo++;
+	public static double mediaPositivos(int[] tabla) {
+		int contador = 0;
+		double resultado = 0.0;
+		for (int i = 0; i < tabla.length; i++) {
+			if (tabla[i] > 0) {
+				contador++;
+				resultado += tabla[i];
 			}
-		return contNegativo ;
+		}
+		return resultado / contador;
 	}
 
-	public static int mediaCeros(int[] numeros) {
-		int contCero = 0;
-		for (int numero : numeros)
-			if (numero == 0) {
-				contCero++;
+	public static int cuentaCero(int[] nums) {
+		int contador = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] == 0) {
+				contador++;
 			}
-		return contCero ;
+		}
+		return contador;
 	}
 
 }
