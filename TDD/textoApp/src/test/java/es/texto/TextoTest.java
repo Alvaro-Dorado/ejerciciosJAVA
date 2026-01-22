@@ -23,7 +23,7 @@ class TextoTest {
     // -------------------------
     // CONSTRUCTORES
     // -------------------------
-
+  
     @Test
     @DisplayName("Constructor(maxLongitud): crea texto vacío con longitud 0 y max configurado")
     void constructorSoloMax_creaTextoVacio() {
@@ -41,6 +41,7 @@ class TextoTest {
     void constructorSoloMax_maxInvalido_lanzaExcepcion() {
         IllegalArgumentException ex0 = assertThrows(IllegalArgumentException.class, () -> new Texto(0),
                 "Debe lanzar IllegalArgumentException si maxLongitud es 0");
+        
         String mensajeEsperado0 = "maxLongitud debe ser > 0";
         String mensaje0 = ex0.getMessage();
         assertEquals(mensajeEsperado0, mensaje0, "Mensaje de error incorrecto para maxLongitud=0");
@@ -55,14 +56,14 @@ class TextoTest {
     @Test
     @DisplayName("Constructor(contenidoInicial, maxLongitud): inicializa contenido y longitud correctamente")
     void constructorConContenido_inicializaCorrectamente() {
-        Texto t = new Texto("Hola", 10);
-
+        Texto t2 = new Texto("Hola", 10);
+        
         String resultadoEsperado = "Hola";
-        String resultado = t.getContenido();
+        String resultado = t2.getContenido();
         assertEquals(resultadoEsperado, resultado, "Debe mantener el contenido inicial");
 
         int longitudEsperada = 4;
-        int longitud = t.longitud();
+        int longitud = t2.longitud();
         assertEquals(longitudEsperada, longitud, "La longitud debe coincidir con el contenido inicial");
     }
 
@@ -76,7 +77,7 @@ class TextoTest {
         String mensaje = ex.getMessage();
         assertEquals(mensajeEsperado, mensaje, "Mensaje de error incorrecto para contenidoInicial null");
     }
-
+ 
     @Test
     @DisplayName("Constructor(contenidoInicial, maxLongitud): lanza excepción si contenidoInicial supera maxLongitud")
     void constructorConContenido_superaMax_lanzaExcepcion() {
@@ -87,7 +88,7 @@ class TextoTest {
         String mensaje = ex.getMessage();
         assertEquals(mensajeEsperado, mensaje, "Mensaje de error incorrecto cuando el contenido inicial excede el máximo");
     }
-
+   
     @Test
     @DisplayName("Constructor(contenidoInicial, maxLongitud): lanza excepción si maxLongitud <= 0 (mensaje comprobado)")
     void constructorConContenido_maxInvalido_lanzaExcepcion() {
@@ -98,12 +99,12 @@ class TextoTest {
         String mensaje = ex.getMessage();
         assertEquals(mensajeEsperado, mensaje, "Mensaje de error incorrecto para maxLongitud inválido");
     }
-
+    
     // -------------------------
     // AÑADIR CARACTERES (final)
     // -------------------------
 
-    @Test
+      @Test
     @DisplayName("anadirFinal(char): añade al final si hay espacio y devuelve true")
     void anadirFinal_char_conEspacio_devuelveTrue() {
         boolean resultadoEsperado = true;
